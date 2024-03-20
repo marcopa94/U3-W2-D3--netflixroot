@@ -8,21 +8,24 @@ function CurrentURL() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
+    const fetchMovieDetails = () => {
       const apiLink = `http://www.omdbapi.com/?i=${movieId}&apikey=8e159e72`;
 
-      try {
-        const response = await fetch(apiLink);
-        if (!response.ok) {
-          throw new Error("Failed to fetch movie details");
-        }
-        const movieData = await response.json();
-        setMovieDetails(movieData);
-        setIsLoading(false);
-      } catch (error) {
-        setIsError(true);
-        setIsLoading(false);
-      }
+      fetch(apiLink)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch movie details");
+          }
+          return response.json();
+        })
+        .then((movieData) => {
+          setMovieDetails(movieData);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsError(true);
+          setIsLoading(false);
+        });
     };
 
     fetchMovieDetails();
