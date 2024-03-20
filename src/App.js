@@ -4,6 +4,7 @@ import Header from "./components/Header.jsx";
 import Movies from "./components/Movies.jsx";
 import MyFooter from "./components/Footer.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dettagli from "./components/Dettagli.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Movies title="Lord of the Rings" category="Trending Now" />} />
           <Route path="/prima" element={<Movies title="Disney" category="Watch It Again" />} />
           <Route path="/seconda" element={<Movies title="Marvel" category="New Releases" />} />
+          <Route path="/Dettagli/:movieId" element={<Dettagli />} />
         </Routes>
         <MyFooter />
       </BrowserRouter>

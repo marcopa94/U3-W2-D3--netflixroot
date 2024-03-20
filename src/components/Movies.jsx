@@ -1,7 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Col, Spinner, Alert } from "react-bootstrap";
+import { Col, Spinner, Alert, Container, Row } from "react-bootstrap";
 import SingleMovie from "./SingleMovie";
+import { Link } from "react-router-dom";
 import "../styles.css";
 
 class Movies extends React.Component {
@@ -54,9 +55,16 @@ class Movies extends React.Component {
     return (
       <>
         <h2>{this.props.category}</h2>
-        <Col className="ms-5">
-          {movies && movies.slice(0, 8).map((movie) => <SingleMovie key={movie.imdbID} img={movie.Poster} />)}
-        </Col>
+        <Container fluid>
+          <Row className="justify-content-center">
+            {movies &&
+              movies.slice(0, 8).map((movie) => (
+                <Col xs={6} sm={4} md={3} lg={2} key={movie.imdbID} className="mb-4">
+                  <SingleMovie img={movie.Poster} imdbID={movie.imdbID} />
+                </Col>
+              ))}
+          </Row>
+        </Container>
       </>
     );
   }
